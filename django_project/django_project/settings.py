@@ -157,16 +157,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL=False
 EMAIL_HOST_USER = 'abdulwahabramay4@gmail.com' 
-EMAIL_HOST_PASSWORD = 'hdzc njzr kmij scqm' 
+EMAIL_HOST_PASSWORD = 'bkfj peny ykbi phpw' 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'premium175.web-hosting.com'  # No protocol here
-# EMAIL_PORT = 465
-# EMAIL_USE_SSL = True  # Use SSL for port 465
-# EMAIL_HOST_USER = 'smsgateway@cloudsoftsolution.net'  # Replace with your email address
-# EMAIL_HOST_PASSWORD = 'A^3kyKK;,e]4'  # Replace with your email password
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Set the default from email address
 
 
 
