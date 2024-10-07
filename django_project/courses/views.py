@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import get_object_or_404
 
-from .models import Course, EnrollmentRequest
+from .models import Course, EnrollmentRequest, CourseActivityLog
 from .serializers import CourseSerializer
 from .permissions import IsAdminOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
@@ -22,7 +22,32 @@ class CourseViewSet(viewsets.ModelViewSet):
     search_fields = ['name', 'description']
 
     def perform_create(self, serializer):
-        serializer.save()
+        course = serializer.save(created_by=self.request.user)  # Save the course instance
+        # Log the activity
+        CourseActivityLog.objects.create(
+            course=course,
+            user=self.request.user,
+            action='create'
+        )
+        
+    def perform_update(self, serializer):
+        course = serializer.save(created_by=self.request.user)  # Save the updated course instance
+        # Log the activity
+        CourseActivityLog.objects.create(
+            course=course,
+            user=self.request.user,
+            action='update'
+        )
+        
+    
+    def perform_destroy(self, instance):
+        # Log the activity before deleting the instance
+        CourseActivityLog.objects.create(
+            course=instance,
+            user=self.request.user,
+            action='delete'
+        )
+        instance.delete()
 
 @csrf_exempt
 @api_view(['POST'])
